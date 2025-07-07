@@ -10,11 +10,10 @@ RUN git clone \
       --branch "v0.4.5"  \
       https://github.com/equinix-labs/otel-cli \
     && cd otel-cli \
-    && go build -ldflags="-w -s" -o otel-cli .
-    # && go install github.com/equinix-labs/otel-cli/
+    && go build -ldflags="-w -s" -o /otel-cli .
 
 
 FROM alpine:latest
-COPY --from=builder /build/otel-cli/otel-cli /otel-cli
+COPY --from=builder /otel-cli /otel-cli
 ENTRYPOINT ["/otel-cli"]
 
